@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  recommender-service:
+    restart: always
+    environment:
+      - FLASK_ENV=production

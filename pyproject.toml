@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "mobilise-recommender-service"
+version = "0.1.0"
+description = ""
+authors = ["Joon-Ho Son <json0820@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask = "^1.0"
+flask_restful = "^0.3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

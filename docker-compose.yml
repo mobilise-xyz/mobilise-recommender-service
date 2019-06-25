@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  recommender-service:
+    build: .
+    ports:
+      - ${PORT}:${PORT}
