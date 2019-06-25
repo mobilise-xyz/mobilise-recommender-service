@@ -8,6 +8,8 @@ authors = ["Joon-Ho Son <json0820@gmail.com>"]
 python = "^3.6"
 flask = "^1.0"
 flask_restful = "^0.3.7"
+requests = "^2.22"
+numpy = "^1.16"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
