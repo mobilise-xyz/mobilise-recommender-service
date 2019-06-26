@@ -14,4 +14,4 @@ class Recommendations(Resource):
         return self.engine.recommendations()
 
     def post(self):
-        print("Recomputing...")
+        self.logger.debug("Recomputing")
