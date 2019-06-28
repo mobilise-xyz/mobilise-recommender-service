@@ -13,7 +13,13 @@ PORT=
 API_URL
 ```
 
-Build and run with
+If you have the [EB CLI](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-local.html) installed, build and run with
+
+```
+eb local run
+```
+
+Otherwise, you can build and run it yourself
 
 ```
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
