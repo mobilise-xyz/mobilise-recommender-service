@@ -32,10 +32,10 @@ I should probably do something to make this less verbose.
 ```
 recommender/
     __init__.py
-    app.py              # this file contains the app and routes
+    app.py                 # this file contains the app and routes
     resources/
         __init__.py
-        recommendations # the recommendation resource
-    engine.py           # heavy lifting
-    mobiliseapi.py      # class that handles all API interaction
+        recommendations.py # the recommendation resource
+    engine.py              # heavy lifting
+    mobiliseapi.py         # class that handles all API interaction
 ```
