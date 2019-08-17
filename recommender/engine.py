@@ -25,7 +25,7 @@ class ShiftRecommenderEngine:
         return list(cumulative_availability.tolist())
 
     @staticmethod
-    def _get_slot_for_time(shift_time: time):
+    def _get_slot_for_time(shift_time: time) -> int:
         if shift_time < time(12, 00, 00):
             return 0
         elif shift_time > time(16, 00, 00):
