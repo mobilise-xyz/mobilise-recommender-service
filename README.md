@@ -10,7 +10,11 @@ You will need to set the environment variables
 
 ```
 PORT=
-API_URL
+DB_USERNAME=
+DB_PASSWORD=
+DB_NAME=
+DB_HOST=
+DB_PORT=
 ```
 
 If you have the [EB CLI](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-local.html) installed, build and run with
@@ -33,9 +37,10 @@ I should probably do something to make this less verbose.
 recommender/
     __init__.py
     app.py                 # this file contains the app and routes
+    models/               
     resources/
         __init__.py
         recommendations.py # the recommendation resource
     engine.py              # heavy lifting
-    mobiliseapi.py         # class that handles all API interaction
+    mobiliseapi.py         # class that acts as an abstraction for the database
 ```
