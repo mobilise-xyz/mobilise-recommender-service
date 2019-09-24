@@ -1,4 +1,3 @@
-from recommender.config import API_KEY, API_URL
 from recommender.app import db
 
 import logging
@@ -15,8 +14,6 @@ from recommender.models.roles import Roles
 class MobiliseApi:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        self.url = API_URL
-        self.auth_header = {"Authorization": "Bearer " + API_KEY}
 
     def shifts(self):
         shifts_rows = Shifts.query.all()
