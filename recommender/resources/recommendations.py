@@ -12,5 +12,6 @@ class Recommendations(Resource):
 
     def post(self):
         # TODO(sonjoonho): Authentication
-        self.logger.debug("Recomputing")
-        return self.engine.recommendations()
+        self.logger.debug("=== Recomputing ===")
+        self.engine.write_recommendations()
+        return "Computation successful"

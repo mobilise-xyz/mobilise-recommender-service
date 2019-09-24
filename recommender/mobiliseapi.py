@@ -16,16 +16,12 @@ class MobiliseApi:
         self.logger = logging.getLogger(__name__)
 
     def shifts(self):
-        shifts_rows = Shifts.query.all()
-
-        self.logger.info(dir(shifts_rows[0]))
-        return shifts_rows
+        self.logger.info("Retrieving shifts")
+        return Shifts.query.all()
 
     def volunteers(self):
-        volunteer_rows = Volunteers.query.all()
-
-        self.logger.info(volunteer_rows)
-        return volunteer_rows
+        self.logger.info("Retrieving volunteers")
+        return Volunteers.query.all()
 
     def write_expected_shortages(self, new_requirements: Dict[Tuple[str, str], float]):
         """Writes to the ShiftRequirements table"""

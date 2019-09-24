@@ -56,11 +56,10 @@ class ShiftRecommenderEngine:
         return predicted_bookings
 
     def _compute_expected_shortages(self) -> Dict[Tuple[str, str], float]:
-        self.logger.info("Computing expected shortages")
 
         shifts = self.api.shifts()
 
-        self.logger.info(f"Shifts: {shifts}")
+        self.logger.info(f"Computing expected shortages for {len(shifts)} shifts")
 
         expected_shortages: Dict[Tuple[str, str], float] = {}
 
