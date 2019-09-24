@@ -18,9 +18,13 @@ API_KEY = get_env_variable("API_KEY", default="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 
 # Flask app configuration
 class Config:
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     DB_NAME = get_env_variable("DB_NAME")
     DB_PORT = get_env_variable("DB_PORT")
-    SQLALCHEMY_DATABASE_URI = f"postgres://{DB_NAME}:{DB_PORT}"
+    DB_USERNAME = get_env_variable("DB_USERNAME")
+    DB_PASSWORD = get_env_variable("DB_PASSWORD")
+    # TODO(sonjoonho): This will need to be changed to work with the production configuration
+    SQLALCHEMY_DATABASE_URI = f"postgres://{DB_USERNAME}:{DB_PASSWORD}@localhost:{DB_PORT}/{DB_NAME}"
 
 
 class DevelopmentConfig(Config):

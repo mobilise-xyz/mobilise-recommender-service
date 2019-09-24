@@ -1,39 +1,15 @@
-from dataclasses import dataclass
-import datetime
-from typing import List
-
-import requests
 from recommender.config import API_KEY, API_URL
+from recommender.app import db
+
 import logging
 
+from typing import Dict, Tuple
 
-# Representation of resources. Do not contain all fields - refer to API documentation.
-# TODO these aren't actually used right now.
-
-
-@dataclass
-class Volunteer:
-    availability: List[List[float]]
-
-
-@dataclass
-class Booking:
-    shiftId: str
-
-
-@dataclass
-class Requirement:
-    numberRequired: int
-    bookings: List[Booking]
-
-
-@dataclass
-class Shift:
-    id: str
-    date: datetime.date
-    start: datetime.time
-    stop: datetime.time
-    requirements: List[Requirement]
+from recommender.models.shifts import Shifts
+from recommender.models.shift_requirements import ShiftRequirements
+from recommender.models.bookings import Bookings
+from recommender.models.volunteers import Volunteers
+from recommender.models.roles import Roles
 
 
 class MobiliseApi:
@@ -43,20 +19,26 @@ class MobiliseApi:
         self.auth_header = {"Authorization": "Bearer " + API_KEY}
 
     def shifts(self):
-        shifts_json = requests.get(self.url + "/shifts", headers=self.auth_header).json()
-        # return self._parse_shifts(shifts_json)
-        return shifts_json
+        shifts_rows = Shifts.query.all()
 
-    def _parse_requirements(self, requirements_json) -> List[Requirement]:
-        self.logger.debug(requirements_json)
-        return [Requirement(numberRequired=requirement["numberRequired"], bookings=requirement["bookings"]) for
-                requirement in
-                requirements_json]
-
-    def _parse_shifts(self, shifts_json) -> List[Shift]:
-        return [Shift(id=shift["id"], date=shift["date"], start=shift["start"], stop=shift["stop"],
-                      requirements=self._parse_requirements(shift["requirements"])) for shift in shifts_json]
+        self.logger.info(dir(shifts_rows[0]))
+        return shifts_rows
 
     def volunteers(self):
-        response = requests.get(self.url + "/volunteers", headers=self.auth_header)
-        return response.json()
+        volunteer_rows = Volunteers.query.all()
+
+        self.logger.info(volunteer_rows)
+        return volunteer_rows
+
+    def write_expected_shortages(self, new_requirements: Dict[Tuple[str, str], float]):
+        """Writes to the ShiftRequirements table"""
+        self.logger.info(f"Writing expected shortages: {new_requirements}")
+
+        shift_requirements_rows = ShiftRequirements.query.all()
+
+        for requirement in shift_requirements_rows:
+            requirement.expectedShortage = new_requirements[(requirement.shiftId, requirement.roleName)]
+
+        db.session.commit()
+
+        self.logger.info("Successfully wrote new shift expected shortages")

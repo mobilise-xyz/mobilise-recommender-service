@@ -10,8 +10,7 @@ class Recommendations(Resource):
 
         self.engine = ShiftRecommenderEngine()
 
-    def get(self):
-        return self.engine.recommendations()
-
     def post(self):
+        # TODO(sonjoonho): Authentication
         self.logger.debug("Recomputing")
+        return self.engine.recommendations()
