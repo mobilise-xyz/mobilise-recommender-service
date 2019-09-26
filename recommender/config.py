@@ -20,8 +20,8 @@ class Config:
     DB_PORT = get_env_variable("DB_PORT")
     DB_USERNAME = get_env_variable("DB_USERNAME")
     DB_PASSWORD = get_env_variable("DB_PASSWORD")
-    # TODO(sonjoonho): This will need to be changed to work with the production configuration
     SQLALCHEMY_DATABASE_URI = f"postgres://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    COMPUTATION_KEY = get_env_variable("COMPUTATION_KEY")
 
 
 class DevelopmentConfig(Config):
