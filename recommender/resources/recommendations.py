@@ -1,8 +1,7 @@
 import logging
 
 from flask_restful import Resource, reqparse, abort
-
-from recommender import app
+from flask import current_app
 from recommender.engine import ShiftRecommenderEngine
 
 
@@ -18,10 +17,9 @@ class Recommendations(Resource):
 
     def post(self):
         args = self.parser.parse_args()
-        if args["key"] != app.config.COMPUTATION_KEY:
+        if args["key"] != current_app.config['COMPUTATION_KEY']:
             abort(401)
 
-        # TODO(sonjoonho): Authentication
         self.logger.info("=== Recomputing ===")
         try:
             self.engine.write_recommendations()

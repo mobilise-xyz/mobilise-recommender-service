@@ -1,4 +1,4 @@
-from recommender.app import db
+from recommender.database import db
 
 import logging
 

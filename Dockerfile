@@ -6,14 +6,15 @@ EXPOSE 5000
 RUN pip install poetry
 
 COPY . /app
-WORKDIR /app/recommender
+WORKDIR /app
 
 # Install dependencies.
 RUN poetry config settings.virtualenvs.create false
 RUN poetry install --no-interaction
 
 # Setup flask environment variables.
-ENV FLASK_APP app.py
+ENV FLASK_APP recommender/app.py
 ENV FLASK_RUN_HOST 0.0.0.0
+ENV PYTHONPATH /app/recommender
 
 CMD ["flask", "run"]

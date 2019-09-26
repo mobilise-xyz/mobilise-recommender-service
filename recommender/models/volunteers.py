@@ -1,5 +1,5 @@
 from sqlalchemy.dialects.postgresql import UUID, ARRAY, INTEGER, CHAR
-from recommender.app import db
+from recommender.database import db
 
 
 class Volunteers(db.Model):

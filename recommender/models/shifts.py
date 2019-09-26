@@ -1,5 +1,5 @@
 from sqlalchemy.dialects.postgresql import UUID, DATE, TIMESTAMP
-from recommender.app import db
+from recommender.database import db
 
 
 class Shifts(db.Model):

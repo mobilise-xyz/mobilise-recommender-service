@@ -1,5 +1,5 @@
 from sqlalchemy.dialects.postgresql import UUID, TIMESTAMP, VARCHAR
-from recommender.app import db
+from recommender.database import db
 
 
 class Bookings(db.Model):

@@ -2,8 +2,9 @@ import os
 
 from flask import Flask
 from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
 from recommender.config import ProductionConfig, DevelopmentConfig
+
+from recommender.database import db
 
 import logging
 
@@ -15,7 +16,7 @@ else:
     config = DevelopmentConfig()
 app.config.from_object(config)
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
 from recommender.resources.recommendations import Recommendations
 
