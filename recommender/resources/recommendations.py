@@ -13,5 +13,8 @@ class Recommendations(Resource):
     def post(self):
         # TODO(sonjoonho): Authentication
         self.logger.debug("=== Recomputing ===")
-        self.engine.write_recommendations()
+        try:
+            self.engine.write_recommendations()
+        except Exception:
+            return "There was a problem computing recommendations", 500
         return "Computation successful"
